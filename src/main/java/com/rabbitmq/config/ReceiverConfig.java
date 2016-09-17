@@ -56,10 +56,10 @@ public class ReceiverConfig {
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 		//声明exchange
-		//channel.exchangeDeclare(exchangeName, "direct",true);
+		channel.exchangeDeclare(exchangeName, "direct",true);
 		//申明队列
 		channel.queueDeclare(queueName, true, false, false, null);
-		//channel.queueBind(queueName, exchangeName, routekey);
+		channel.queueBind(queueName, exchangeName, routekey);
 		QueueingConsumer consumer = new QueueingConsumer(channel);
 		//接受指定消息队列中的数据
 		channel.basicConsume(queueName, true, consumer);
